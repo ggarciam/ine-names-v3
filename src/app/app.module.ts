@@ -1,9 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {Http, Response, RequestOptions, Headers, HttpModule} from '@angular/http';
+import { Http, Response, RequestOptions, Headers, HttpModule } from '@angular/http';
 
 
 import { AppComponent } from './app.component';
+import { ApiService } from './api.service';
 
 
 @NgModule({
@@ -14,7 +15,7 @@ import { AppComponent } from './app.component';
     BrowserModule,
     HttpModule
   ],
-  providers: [],
+  providers: [ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
