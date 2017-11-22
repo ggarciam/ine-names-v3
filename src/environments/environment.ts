@@ -7,5 +7,5 @@ export const environment = {
   production: false,
 
   // URL of development API
-  apiUrl: 'http://localhost:3200'
+  apiUrl: 'https://still-cliffs-65517.herokuapp.com/api/v1'
 };
