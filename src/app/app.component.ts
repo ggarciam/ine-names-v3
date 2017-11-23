@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NameDataService } from './names/name-data.service';
 import { Name } from './names/name';
+import { FormControl } from '@angular/forms';
+import { MatAutocompleteModule, } from '@angular/material';
+
 
 @Component({
   selector: 'app-root',
@@ -11,10 +14,13 @@ import { Name } from './names/name';
 export class AppComponent {
   title = 'app';
   names: Name[] = [];
+  nameCtrl: FormControl;
 
   constructor(
     private nameDataService: NameDataService
-  ) {}
+  ) {
+    this.nameCtrl = new FormControl();
+  }
 
   public ngOnInit() {
     this.nameDataService
