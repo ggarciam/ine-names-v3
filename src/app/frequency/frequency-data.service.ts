@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Frequency } from './frequency';
-import { ApiService } from '../Api/api.service';
+import { ApiService } from '../api/api.service';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export class NameDataService {
+export class FrequencyDataService {
 
   frequencies: Frequency[] = [];
 

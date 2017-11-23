@@ -1,15 +1,20 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { NameDataService } from '../names/name-data.service';
+import { FrequencyDataService } from '../frequency/frequency-data.service';
+import { ApiService } from '../api/api.service';
+import { ApiMockService } from '../api/api-mock.service';
 
-describe('NameDataService', () => {
+describe('FrequencyDataService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [NameDataService]
+      providers: [FrequencyDataService, {
+        provide: ApiService,
+        useClass: ApiMockService
+      }]
     });
   });
 
-  it('should be created', inject([NameDataService], (service: NameDataService) => {
+  it('should be created', inject([FrequencyDataService], (service: FrequencyDataService) => {
     expect(service).toBeTruthy();
   }));
 });

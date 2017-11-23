@@ -4,7 +4,7 @@ import { Http, Response, RequestOptions, Headers, HttpModule } from '@angular/ht
 
 
 import { AppComponent } from './app.component';
-import { ApiService } from './Api/api.service';
+import { ApiService } from './api/api.service';
 
 
 @NgModule({
