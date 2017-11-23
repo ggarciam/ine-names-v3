@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NameDataService } from './names/name-data.service';
 import { Name } from './names/name';
 import { FormControl } from '@angular/forms';
-import { MatAutocompleteModule, } from '@angular/material';
 
 
 @Component({
@@ -15,7 +14,7 @@ export class AppComponent {
   title = 'app';
   names: Name[] = [];
   nameCtrl: FormControl;
-
+  
   constructor(
     private nameDataService: NameDataService
   ) {
@@ -30,6 +29,10 @@ export class AppComponent {
           this.names = names;
         }
       );
+  }
+  
+  filter(val: Name): string {
+    return this.names.filter(name => name.name.toLowerCase().indexOf(val.name.toLowerCase()) === 0)[0].name;
   }
 
   onAddName(name) {
