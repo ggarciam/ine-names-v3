@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { NameDataService } from './name-data.service';
+import { NameDataService } from '../names/name-data.service';
 
 describe('NameDataService', () => {
   beforeEach(() => {

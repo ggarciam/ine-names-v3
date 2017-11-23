@@ -1,12 +1,12 @@
-import { Name } from './name';
+import { Frequency } from './frequency';
 
-describe('Name', () => {
+describe('Frequency', () => {
   it('should create an instance', () => {
-    expect(new Name()).toBeTruthy();
+    expect(new Frequency()).toBeTruthy();
   });
 
   it('should accept values in the constructor', () => {
-    const name = new Name({
+    const name = new Frequency({
       name: 'Gonzalo',
       genre: 2
     });

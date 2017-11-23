@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NameDataService } from './name-data.service';
-import {Name} from './name';
+import { NameDataService } from './names/name-data.service';
+import { Name } from './names/name';
 
 @Component({
   selector: 'app-root',

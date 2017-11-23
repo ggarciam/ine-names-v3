@@ -1,34 +1,34 @@
 import { Injectable } from '@angular/core';
-import {Name} from './name';
-import {ApiService} from './Api/api.service';
+import { Frequency } from './frequency';
+import { ApiService } from '../Api/api.service';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class NameDataService {
 
-  names: Name[] = [];
+  frequencies: Frequency[] = [];
 
   constructor(
     private api: ApiService
   ) { }
 
-  addName(name: Name): Observable<Name> {
-    return this.api.createName(name);
+  addFrequency(frequency: Frequency): Observable<Frequency> {
+    return this.api.createFrequency(frequency);
   }
 
-  deleteNamebyId(nameId: number): Observable<Name> {
-    return this.api.deleteNameById(nameId);
+  deleteFrequencybyId(frequencyId: number): Observable<Frequency> {
+    return this.api.deleteFrequencyById(frequencyId);
   }
 
-  updateName(name: Name): Observable<Name> {
-    return this.api.updateName(name);
+  updateFrequency(frequency: Frequency): Observable<Frequency> {
+    return this.api.updateFrequency(frequency);
   }
 
-  getAllNames(): Observable<Name[]> {
-    return this.api.getAllNames();
+  getAllFrequencies(): Observable<Frequency[]> {
+    return this.api.getAllFrequencies();
   }
 
-  getNamebyId(nameId: number): Observable<Name> {
-    return this.api.getNameById(nameId);
+  getFrequencybyId(frequencyId: number): Observable<Frequency> {
+    return this.api.getFrequencyById(frequencyId);
   }
 }
