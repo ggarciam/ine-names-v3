@@ -34,6 +34,11 @@ export class AppComponent {
   filter(val: Name): string {
     return this.names.filter(name => name.name.toLowerCase().indexOf(val.name.toLowerCase()) === 0)[0].name;
   }
+  
+  displayFn(name: Name): string {
+    if (!name) {return;}
+    return name.name;
+  }
 
   onAddName(name) {
     // this.nameDataService.addName(name);

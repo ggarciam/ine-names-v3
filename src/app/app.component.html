@@ -33,8 +33,8 @@
     <form class="names-form">
       <mat-form-field class="full-width">
         <input type="text" matInput placeholder="Nombre" aria-label="Nombre" [matAutocomplete]="auto" [formControl]="nameCtrl">
-        <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let name of names" [value]="name.name">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let name of names" [value]="name">
             <span>{{name.name}}</span>
           </mat-option>
         </mat-autocomplete>
