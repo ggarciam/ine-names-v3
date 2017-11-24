@@ -10,7 +10,7 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./app.component.css'],
   providers: [NameDataService]
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'app';
   names: Name[] = [];
   nameCtrl: FormControl;
