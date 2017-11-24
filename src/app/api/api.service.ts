@@ -1,30 +1,32 @@
-import {Injectable} from '@angular/core';
-import {environment} from '../../environments/environment';
+import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
 
-import {Http, Response} from '@angular/http';
-import {Observable} from 'rxjs/Observable';
+import { Http, Response } from '@angular/http';
+import { HttpParams, HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
 import { Name } from '../names/name';
 import { Frequency } from '../frequency/frequency';
+import { FrequencySearch } from '../frequency/frequencySearch';
 
 const API_URL = environment.apiUrl;
 
 @Injectable()
 export class ApiService {
+  params = new HttpParams();
 
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
   }
 
   // API: GET /names
   public getAllNames(): Observable<Name[]> {
     return this.http
       .get(API_URL + '/names')
-      .map(response => {
-        const names = response.json();
-        return names.map((name) => new Name(name));
+      .map(data => {
+        return data;
       })
       .catch(this.handleError);
   }
@@ -34,8 +36,8 @@ export class ApiService {
     // will use this.http.post()
     return this.http
       .post(API_URL + '/names', name)
-      .map(response => {
-        return new Name(response.json());
+      .map(data => {
+        return data;
       })
       .catch(this.handleError);
   }
@@ -45,8 +47,8 @@ export class ApiService {
     // will use this.http.get()
     return this.http
       .get(API_URL + '/names' + nameId)
-      .map(response => {
-        return new Name(response.json());
+      .map(data => {
+        return data;
       })
       .catch(this.handleError);
   }
@@ -56,8 +58,8 @@ export class ApiService {
     // will use this.http.put()
     return this.http
       .put(API_URL + '/names/' + name.id, name)
-      .map(response => {
-        return new Name(response.json());
+      .map(data => {
+        return data;
       })
       .catch(this.handleError);
   }
@@ -67,17 +69,26 @@ export class ApiService {
     // will use this.http.delete()
     return this.http
       .delete(API_URL + '/names' + nameId)
-      .map(response => null)
+      .map(data => null)
       .catch(this.handleError);
   }
 
   // API: GET /frequency
-  public getAllFrequencies(): Observable<Frequency[]> {
+  public getAllFrequencies(options: FrequencySearch): Observable<Frequency[]> {
+    let params: HttpParams = new HttpParams({});
+    if (options.name) {
+      params = params.append('name', options.name);
+    }
+    if (options.genre) {
+      params = params.append('genre', options.genre);
+    }
+    // if (options.search_name) {
+    //   params = params.append('search_name', options.search_name);
+
     return this.http
-      .get(API_URL + '/frequency')
-      .map(response => {
-        const frequencies = response.json();
-        return frequencies.map((frequency) => new Frequency(frequency));
+      .get(API_URL + '/frequency', {params: params})
+      .map(data => {
+        return data;
       })
       .catch(this.handleError);
   }
@@ -87,8 +98,8 @@ export class ApiService {
     // will use this.http.post()
     return this.http
       .post(API_URL + '/frequency', frequency)
-      .map(response => {
-        return new Frequency(response.json());
+      .map(data => {
+        return data;
       })
       .catch(this.handleError);
   }
@@ -98,8 +109,8 @@ export class ApiService {
     // will use this.http.get()
     return this.http
       .get(API_URL + '/frequency' + frequencyId)
-      .map(response => {
-        return new Frequency(response.json());
+      .map(data => {
+        return data;
       })
       .catch(this.handleError);
   }
@@ -109,8 +120,8 @@ export class ApiService {
     // will use this.http.put()
     return this.http
       .put(API_URL + '/frequency/' + frequency.id, frequency)
-      .map(response => {
-        return new Frequency(response.json());
+      .map(data => {
+        return data;
       })
       .catch(this.handleError);
   }
@@ -120,7 +131,7 @@ export class ApiService {
     // will use this.http.delete()
     return this.http
       .delete(API_URL + '/names' + frequencyId)
-      .map(response => null)
+      .map(data => null)
       .catch(this.handleError);
   }
 

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Frequency } from './frequency';
 import { ApiService } from '../api/api.service';
 import { Observable } from 'rxjs/Observable';
+import { FrequencySearch } from './frequencySearch';
 
 @Injectable()
 export class FrequencyDataService {
@@ -24,8 +25,8 @@ export class FrequencyDataService {
     return this.api.updateFrequency(frequency);
   }
 
-  getAllFrequencies(): Observable<Frequency[]> {
-    return this.api.getAllFrequencies();
+  getAllFrequencies(options: FrequencySearch): Observable<Frequency[]> {
+    return this.api.getAllFrequencies(options);
   }
 
   getFrequencybyId(frequencyId: number): Observable<Frequency> {

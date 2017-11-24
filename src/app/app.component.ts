@@ -1,24 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import { NameDataService } from './names/name-data.service';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Name } from './names/name';
-import { FormControl } from '@angular/forms';
+import { Frequency } from './frequency/frequency';
+import { FrequencySearch } from './frequency/frequencySearch';
 
+import { NameDataService } from './names/name-data.service';
+import { FrequencyDataService } from './frequency/frequency-data.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [NameDataService]
+  providers: [NameDataService, FrequencyDataService]
 })
-export class AppComponent implements OnInit{
-  title = 'app';
+export class AppComponent implements OnInit {
   names: Name[] = [];
-  nameCtrl: FormControl;
-  
+  name: Name;
+  frequencies: Frequency[];
+
+  public nameForm = this.fb.group({
+    nameField: ['', Validators.required]
+  });
+
   constructor(
-    private nameDataService: NameDataService
+    private nameDataService: NameDataService,
+    private frequencyDataService: FrequencyDataService,
+    public fb: FormBuilder
   ) {
-    this.nameCtrl = new FormControl();
   }
 
   public ngOnInit() {
@@ -30,9 +38,9 @@ export class AppComponent implements OnInit{
         }
       );
   }
-  
+
   displayFn(name: Name): string {
-    if (!name) {return;}
+    if (!name) { return; }
     return name.name;
   }
 
@@ -54,6 +62,25 @@ export class AppComponent implements OnInit{
       .subscribe(
         (_) => {
           this.names = this.names.filter((n) => n.id !== name.id);
+        }
+      );
+  }
+
+  checkFrequency(event) {
+    console.log(event);
+    console.log(this.nameForm.value);
+
+    const params: FrequencySearch = {
+      'name': this.nameForm.value.nameField.name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase(),
+      'genre': this.nameForm.value.nameField.genre
+    };
+
+    this.frequencyDataService
+      .getAllFrequencies(params)
+      .subscribe(
+        (frequencies) => {
+          console.log(frequencies);
+          this.frequencies = frequencies;
         }
       );
   }
