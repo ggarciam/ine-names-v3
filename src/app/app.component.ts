@@ -10,11 +10,11 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./app.component.css'],
   providers: [NameDataService]
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'app';
   names: Name[] = [];
   nameCtrl: FormControl;
-  
+
   constructor(
     private nameDataService: NameDataService
   ) {
@@ -30,7 +30,7 @@ export class AppComponent {
         }
       );
   }
-  
+
   displayFn(name: Name): string {
     if (!name) {return;}
     return name.name;
