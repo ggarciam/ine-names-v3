@@ -5,7 +5,7 @@ export class Frequency {
   total: number;
   permileage: string;
   name_id: number;
-  genre: 2;
+  genre: number;
 
   constructor(values: Object = {}) {
     Object.assign(this, values);
